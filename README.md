@@ -1,0 +1,1 @@
+a clean, sleek search wrapper that was made for fun.
