@@ -25,13 +25,13 @@
                     let isChecked = "checked";
                     if (parseInt(localStorage[id]) == 1) {
                         this.param[0] = 1;
-                        new func(1);
+                        func(1);
                     } else if (parseInt(localStorage[id]) == 0) {
                         this.param[0] = 0;
-                        new func(0);
+                        func(0);
                     } else {
                         this.param[0] = param[0];
-                        new func(param[0]);
+                        func(param[0]);
                     }
 
                     let button = document.createElement("DIV");
@@ -50,11 +50,11 @@
                         if (checkbox.classList.contains(isChecked)) {
                             checkbox.classList.remove(isChecked);
                             localStorage[id] = "0";
-                            new func(0);
+                            func(0);
                         } else {
                             checkbox.classList.add(isChecked);
                             localStorage[id] = "1";
-                            new func(1);
+                            func(1);
                         }
                     };
                     break;
@@ -71,9 +71,9 @@
                         input.value = localStorage[id];
                     }
 
-                    new func(this.param[1], input.value);
+                    func(this.param[1], input.value);
                     input.oninput = () => {
-                        new func(this.param[1], input.value);
+                        func(this.param[1], input.value);
                         localStorage[id] = input.value;
                     };
 

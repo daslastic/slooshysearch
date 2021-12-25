@@ -1,5 +1,13 @@
 {
+  "private": true,
   "devDependencies": {
+    "node-sass": "^7.0.0",
+    "onchange": "^7.1.0",
     "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "build": "npx tsc search.ts --lib ES2015,DOM --target es6",
+    "css": "npx node-sass search.scss > search.css",
+    "serve": "npx onchange '**' -e '**/*.css' -e '**/*.js' -- npm run css"
   }
 }
