@@ -170,7 +170,7 @@
 }
 
 // dropdowns
-function dropdown(node) {
+function dropdown(node: HTMLElement) {
     let sibling = node.nextElementSibling;
     if (sibling != null) {
         node.classList.toggle('toggled');
