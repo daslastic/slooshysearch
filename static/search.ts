@@ -125,50 +125,6 @@
 
 }
 
-// shortcut menu
-{
-    const shortcuts = document.querySelectorAll(".shortcut-id");
-    let shortcutTabs = [];
-    let currentTab = parseInt(localStorage['tabIndex']) || 0;
-
-    for (let i = 0; i < shortcuts.length; i++) {
-        let shortcutTab = document.getElementById("shortcut_" + i);
-        shortcutTabs.push(shortcutTab);
-
-        if (i != currentTab) {
-            shortcuts[i].classList.add("hide");
-        } else {
-            shortcutTabs[currentTab].classList.add("link");
-        }
-
-        shortcutTab.onclick = () => {
-            let fadeOutDuration = 200;
-            if (currentTab == i) {
-                return;
-            }
-            shortcuts[currentTab].classList.add("fade-out");
-
-            setTimeout(() => {
-                shortcuts[currentTab].classList.remove("fade-out");
-                // swap tabs
-                shortcutTabs[currentTab].classList.remove("link");
-                shortcutTab.classList.add("link");
-                currentTab = i;
-                localStorage['tabIndex'] = i.toString();
-
-                for (let o = 0; o < shortcuts.length; o++) {
-                    if (o != i) {
-                        shortcuts[o].classList.remove("fade-in");
-                        shortcuts[o].classList.add("hide");
-                    }
-                }
-                shortcuts[i].classList.remove("hide");
-                shortcuts[i].classList.add("fade-in");
-            }, fadeOutDuration);
-        }
-    }
-}
-
 // dropdowns
 function dropdown(node: HTMLElement) {
     let sibling = node.nextElementSibling;

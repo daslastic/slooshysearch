@@ -4,55 +4,37 @@
 
 @font-face {
 	font-family: Montserrat;
-	src: url(fonts/Montserrat-Regular.ttf);
+	src: url(fonts/montserrat.ttf);
 }
 @font-face {
 	font-family: Poppins;
-	src: url(fonts/Poppins-Bold.ttf);
+	src: url(fonts/poppins.ttf);
 }
 
 html {
     font-size: 20px;
     background-color: var(--primary);
-    height: 100vh;
     user-select: none;
-    overflow: hidden;
 }
 
-h1,
-h2,
-label,
-b {
+h1, h2, label, b {
     margin: 0;
     font-family: 'Poppins', 'Montserrat', Helvetica, Arial;
     color: var(--text_color);
 }
 
-h2,
-h3,
-p,
-button,
-b,
-input,
-span,
-a {
+h2, h3, p, button, b, input, span, a {
     font-family: 'Montserrat', Helvetica, Arial;
     color: var(--text_color);
 }
 
 :root {
     --text_color: white;
-    --primary: #101010;
-    --base: rgb(29, 29, 29);
-    --secondary: #0c0c0c;
-    --third: rgb(10, 10, 10);
-    --accent: rgba(82, 153, 105, 1);
+    --primary: #101638;
+    --secondary: #141C48;
+    --secondary-hover: #142348;
+    --accent: #ff0c58;
     --border: .9em;
-}
-
-svg {
-    fill: var(--text_color) !important;
-    color: var(--text_color) !important;
 }
 
 :focus {
@@ -65,8 +47,9 @@ svg {
 }
 
 body {
-    height: 100vh;
-    margin: 0;
+	margin: 0;
+    min-height: 100vh;
+	display: flex;
 }
 
 ul {
@@ -96,12 +79,15 @@ ul {
 a, button {
     padding: 0;
     text-decoration: none;
+
     &.link {
         color: var(--accent);
     }
+
     &.href:hover {
         text-decoration: underline;
     }
+
     cursor: pointer;
 }
 
@@ -159,8 +145,14 @@ button {
 .search {
     &__container {
         display: flex;
-        align-items: center;
-        height: 100%;
+		max-width: 80em;
+		width: 100%;
+		margin: auto;
+		align-items: center;
+		justify-content: center;
+		& > * {
+			flex: 1;
+		}
     }
     &__title {
         margin: 0 0 1.5em 0;
@@ -180,85 +172,101 @@ button {
         right: 0;
         top: .25em;
         margin-right: .7em;
-        z-index: 99;
     }
     &__bar {
-        margin: -5em auto 0 auto;
-        padding: 0 1.3em;
-        width: 100%;
-        max-width: 30em;
+        padding: 0 1.3em 0 0;
+		max-width: 40em;
+		width: 100%;
         & .form {
             position: relative;
             animation: input-in 300ms ease-in-out;
         }
     }
     &__input {
-        background-color: var(--base);
+        background-color: var(--secondary);
         border-radius: var(--border);
         padding: .5em;
-        width: 100%;
         margin: 0 auto;
+		width: 100%;
     }
 }
 
 .shortcut {
-    margin-top: 2.5em;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    background-color: var(--secondary);
-    padding: 1.5em;
     border-radius: var(--border);
-    width: 100%;
-    &__tabs {
-        text-align: center;
-        margin-bottom: .4em;
-        animation: pop-in-bottom 400ms ease-in-out;
-        li:not(:last-child) {
-            margin-right: 1em !important;
-        }
-    }
+    padding: 1.5em;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&__section {
+		flex: 1;
+	}
+	&__section:not(:first-child) {
+		margin-top: 2em;
+	}
+ 
     &__items {
         animation: pop-in-bottom 400ms ease-in-out;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
+		display: block;
+
         li {
-            margin: .5em .5em 0 .5em;
+            margin: .8em;
+		 	flex: 1;
+			max-width: 13em;
+			width: 100%;
+			height: 8em;
+			display: inline-block;
         }
+
         a {
             position: relative;
-            background-color: rgb(29, 29, 29);
-            padding: 1em;
             display: flex;
-            transition: background-color 100ms ease-in-out;
-            border-radius: var(--border);
             justify-content: center;
             align-items: center;
-            height: 3.5em;
+
+            background-color: var(--secondary);
+            border-radius: var(--border);
+
+			svg, path:not([fill="url(#a)"]) {
+				fill: var(--accent) !important;
+				width: 3.5em;
+				// lmao, ain't bothering with this
+				// honestly this css is a mess but I am as well :)
+				&.yellow {
+					fill: yellow !important;
+					& *:not([fill="none"]) {
+						fill: yellow !important;
+					}
+				}
+			}
+
+			width: 100%;
+			height: 100%;
+            padding: 1em;
+            transition: background-color 100ms ease-in-out;
+
             &:hover, &:focus {
-                background-color: var(--accent);
-                span {
+				background-color: var(--secondary-hover);
+                & > span {
                     visibility: visible;
                     opacity: 1;
                     transform: scale(1);
                 }
             }
         }
+
         span {
             visibility: hidden;
             position: absolute;
-            top: -60%;
+            top: -30%;
             background-color: var(--secondary);
-            transform: scale(.7);
+            transform: scale(.9);
             padding: .2em .5em;
             border-radius: var(--border);
             pointer-events: none;
             opacity: 0;
             transition: all 200ms ease-in-out;
-    
         }
     }
 }
@@ -275,7 +283,7 @@ button {
         transform: translate(-50%, calc(100% + 1em));
         width: 13em;
         padding: 1em;
-        background-color: var(--third);
+        background-color: var(--secondary);
         border-radius: var(--border);
         animation: fade-in 180ms ease-in;
         &.animate {
@@ -293,6 +301,7 @@ button {
         }
         z-index: 99;
     }
+
     &__button {
         display: flex;
         align-items: center;
@@ -364,49 +373,66 @@ button {
     }
 }
 
-@media (max-width: 650px) {
-    html {
-        font-size: 14px;
-    }
-    .search {
-        &__bar {
-            margin-top: 3em;
-        }
-        &__title {
-            display: block;
-            img {
-                width: 3em;
-                margin: 0 0 .25em 0;
-            }
-        }
-    }
-    .nav {
-        &__wrapper {
-            top: auto;
-            bottom: 0;
-            animation: pop-in-bottom 300ms ease-out;
-        }
-    }
-    .settings {
+// Mobile is not that important which is why it comes last
+@media (max-width: 1300px) {
+	html {
+		font-size: 1em;
+	}
+	body {
+		padding: .5em;
+	}
+
+	.search {
+		&__container { 
+			margin: 5em 0;
+			flex-direction: column;
+		}
+		&__bar {
+			max-width: 50em;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+
+	.shortcut {
+		width: 100%;
+		text-align:center
+	}
+
+	.settings {
         &__dropdown {
             transform: translate(-70%, calc(100% + 1em));
         }
     }
-    .shortcut {
-        position: static;
-        transform: translateX(0);
-        background: none;
-        padding: 0;
-        &__items li {
-            margin: .5em;
-        }
-    }
 }
 
-@media (max-height: 650px) {
-    .search {
-        &__bar {
-            margin-top: 0;
-        }
-    }
+@media (max-width: 700px) {
+	html {
+		font-size: .8em;
+	}
+	.shortcut {
+		padding: 0;
+		margin-top: 5em;
+		&__items {
+			li {
+				width: 8em;
+			}
+		} 
+	}
+}
+
+// scroll
+::-webkit-scrollbar {
+    display: block;
+    overflow: auto;
+    height: .7em;
+    width: .5em;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: .5em;
 }
