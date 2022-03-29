@@ -5,6 +5,7 @@
     (function (OptionType) {
         OptionType[OptionType["Checkbox"] = 0] = "Checkbox";
         OptionType[OptionType["Input"] = 1] = "Input";
+        OptionType[OptionType["Select"] = 2] = "Select";
     })(OptionType || (OptionType = {}));
     class Option {
         constructor(id, type, param, func) {
@@ -55,7 +56,7 @@
                 case OptionType.Input: {
                     let inputBox = document.createElement("DIV");
                     inputBox.innerHTML += `
-                        <label for="` + id + "%menu" + `">` + id + `</label>
+                        <label for="` + id + `">` + id + `</label>
                         <input class="value" value="` + param[0] + `" id="` + id + "%menu" + `"></button>
                     `;
                     let input = inputBox.children[1];
@@ -68,6 +69,28 @@
                         localStorage[id] = input.value;
                     };
                     menu.appendChild(inputBox);
+                    break;
+                }
+                case OptionType.Select: {
+                    let selectBox = document.createElement("DIV");
+                    selectBox.classList.add("checkbox");
+                    selectBox.innerHTML += `
+                        <label for="` + id + `">` + id + `</label>
+						<select>
+							<option value="0"><span>goofy</span></option>
+							<option value="1"><span>dark</span></option>
+							<option value="2"><span>light</span></option>
+						</select>
+                    `;
+                    let select = selectBox.children[1];
+                    func(localStorage[id]);
+                    select.onclick = (e) => {
+                        e.preventDefault();
+                        let themeId = select.selectedIndex;
+                        localStorage[id] = themeId;
+                        func(themeId);
+                    };
+                    menu.appendChild(selectBox);
                     break;
                 }
             }
@@ -106,11 +129,45 @@
                 input.src = change;
             }
         }),
-        new Option("Search Engine", OptionType.Input, ["https://duckduckgo.com/", "search"], (elemToChange, change) => {
+        new Option("Search Engine", OptionType.Input, ["https://google.com/search", "search"], (elemToChange, change) => {
             let input = document.getElementById(elemToChange);
             if (input instanceof HTMLFormElement) {
                 input.action = change;
             }
+        }),
+        new Option("Theme", OptionType.Select, [], (selectId) => {
+            let theme;
+            if (selectId == 0) {
+                theme = `
+					--text_color: white;
+					--primary: #101638;
+					--secondary: #141C48;
+					--secondary-hover: #1d2654;
+					--accent: #ff0c58;
+					--border: .9em;
+				`;
+            }
+            else if (selectId == 1) {
+                theme = `
+					--text_color: white;
+					--primary: #121212;
+					--secondary: #1f2126;
+					--secondary-hover: #2a2d33;
+					--accent: #009c5a;
+					--border: .9em;
+				`;
+            }
+            else if (selectId == 2) {
+                theme = `
+					--text_color: black;
+					--primary: #f0dddd;
+					--secondary: #fff5f5;
+					--secondary-hover: #fff;
+					--accent: #ff0c58;
+					--border: .9em;
+				`;
+            }
+            document.getElementById("theme").innerHTML = ":root{" + theme + "}";
         }),
     ];
 }

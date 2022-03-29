@@ -23,7 +23,7 @@ h1, h2, label, b {
     color: var(--text_color);
 }
 
-h2, h3, p, button, b, input, span, a {
+h2, h3, p, button, b, input, span, a, select {
     font-family: 'Montserrat', Helvetica, Arial;
     color: var(--text_color);
 }
@@ -32,7 +32,17 @@ h2, h3, p, button, b, input, span, a {
     --text_color: white;
     --primary: #101638;
     --secondary: #141C48;
-    --secondary-hover: #142348;
+    --secondary-hover: #1d2654;
+    --accent: #ff0c58;
+    --border: .9em;
+}
+
+
+:root {
+    --text_color: black;
+    --primary: #f0dddd;
+    --secondary: #fff5f5;
+    --secondary-hover: #fff;
     --accent: #ff0c58;
     --border: .9em;
 }
@@ -67,9 +77,11 @@ ul {
 }
 
 .icon, img[class^=".search"] {
+	fill: var(--text_color);
     margin: 0;
     pointer-events: none;
     width: 1.65em;
+	height: 1.65em;
 }
 
 .hide {
@@ -91,14 +103,14 @@ a, button {
     cursor: pointer;
 }
 
-input {
+input, select {
     background: transparent;
     outline: 0;
     border: 0;
     font-size: 1em;
     &.value {
         background-color: var(--secondary);
-        border-radius: .3em;
+        border-radius: var(--border);
         margin-top: .5em;
         font-size: .8em;
         width: 100%;
@@ -107,6 +119,14 @@ input {
 
 input[type="submit"] {
     cursor: pointer;
+}
+
+input[type="select"] {
+	background-color: black;
+}
+
+select option {
+	background-color: var(--primary);
 }
 
 label {
@@ -195,9 +215,7 @@ button {
     border-radius: var(--border);
     padding: 1.5em;
 
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	text-align: center;
 
 	&__section {
 		flex: 1;
@@ -212,9 +230,7 @@ button {
 
         li {
             margin: .8em;
-		 	flex: 1;
-			max-width: 13em;
-			width: 100%;
+			min-width: 15em;
 			height: 8em;
 			display: inline-block;
         }
@@ -259,10 +275,10 @@ button {
         span {
             visibility: hidden;
             position: absolute;
-            top: -30%;
-            background-color: var(--secondary);
+            top: -10%;
+            background-color: var(--accent);
             transform: scale(.9);
-            padding: .2em .5em;
+            padding: .3em .6em;
             border-radius: var(--border);
             pointer-events: none;
             opacity: 0;
@@ -313,7 +329,7 @@ button {
             transform: rotate(0) scale(0.9);
             opacity: 1;
         }
-        cursor: pointer;
+        cursor: pointer
     }
 }
 
@@ -374,7 +390,7 @@ button {
 }
 
 // Mobile is not that important which is why it comes last
-@media (max-width: 1300px) {
+@media (max-width: 1450px) {
 	html {
 		font-size: 1em;
 	}
@@ -384,7 +400,7 @@ button {
 
 	.search {
 		&__container { 
-			margin: 5em 0;
+			margin: 5em auto;
 			flex-direction: column;
 		}
 		&__bar {
@@ -396,10 +412,6 @@ button {
 		}
 	}
 
-	.shortcut {
-		width: 100%;
-		text-align:center
-	}
 
 	.settings {
         &__dropdown {
@@ -434,5 +446,5 @@ button {
 
 ::-webkit-scrollbar-thumb {
     background: var(--accent);
-    border-radius: .5em;
+    border-radius: var(--border);
 }
