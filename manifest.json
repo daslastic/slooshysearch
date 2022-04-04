@@ -1,9 +1,0 @@
-{
-	"manifest_version": 3,	
-	"name": "slooshysearch",
-	"version": "0.1",
-
-	"chrome_url_overrides" : {
-		"newtab": "public/index.html"
-	}
-}
