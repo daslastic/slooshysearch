@@ -112,8 +112,8 @@
     }
 
     let options: Option[] = [
-        new Option("ShortcutMenu", OptionType.Checkbox, [1], (enabled) => {
-            let menu = document.getElementById("Shortcut Menu");
+        new Option("Shortcut Menu", OptionType.Checkbox, [1], (enabled) => {
+            let menu = document.getElementById("ShortcutMenu");
             if (menu == null) return;
             if (!enabled) {
                 menu.classList.add("fade-out");
