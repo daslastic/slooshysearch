@@ -41,8 +41,8 @@
 
                     button.classList.add("checkbox");
                     button.innerHTML += `
-                        <label for="` + id + "%menu" + `">` + id + `</label>
-                        <button class="checkbox ` + sid + `" id="` + id + "%menu" + `"></button>
+                        <label for="` + id + `">` + id + `</label>
+                        <button class="checkbox ` + sid + `" id="` + id + `"></button>
                     `;
                     menu.appendChild(button);
 
@@ -112,7 +112,7 @@
     }
 
     let options: Option[] = [
-        new Option("Shortcut Menu", OptionType.Checkbox, [1], (enabled) => {
+        new Option("ShortcutMenu", OptionType.Checkbox, [1], (enabled) => {
             let menu = document.getElementById("Shortcut Menu");
             if (menu == null) return;
             if (!enabled) {
@@ -208,6 +208,10 @@ window.onload = () => {
     setInterval(() => {
         timer.innerHTML = getTime();
     }, 1000);
+
+
+	let dropdown = document.getElementById("dropdown_btn");
+	dropdown.onclick = () => { this.dropdown(dropdown); };
 }
 
 function getTime() {

@@ -1,19 +1,9 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,	
 	"name": "slooshysearch",
-	"description": "a kewl fairly customizable new tab page extension!",
-	"version": "1.0",
-	"icons": {
-		"16": "",
-		"48": "",
-		"128": "",
-	},
-	"page_action": {
-		"default_icon": {
-			"16": "",
-			"48": "",
-			"128": "",
-		},
-	},
-	"content_scripts": [{}]
+	"version": "0.1",
+
+	"chrome_url_overrides" : {
+		"newtab": "public/index.html"
+	}
 }
